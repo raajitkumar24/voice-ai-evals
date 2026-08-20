@@ -1,0 +1,10 @@
+id: tool_trajectory
+version: "1"
+name: Tool trajectory
+family: TOOL_TRAJECTORY
+scope: CONVERSATION
+severity: HIGH
+description: Evaluate selection, timing, arguments, provenance, execution, and result use.
+applicability: Apply only when tool definitions or tool calls are available.
+prompt_file: prompt.md
+output_schema: judge_output_v1

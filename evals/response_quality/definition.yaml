@@ -1,0 +1,10 @@
+id: response_quality
+version: "1"
+name: Response quality
+family: RESPONSE_QUALITY
+scope: CONVERSATION
+severity: MEDIUM
+description: Evaluate instruction adherence, correctness, relevance, and voice suitability.
+applicability: Apply when at least one transcript turn is available.
+prompt_file: prompt.md
+output_schema: judge_output_v1

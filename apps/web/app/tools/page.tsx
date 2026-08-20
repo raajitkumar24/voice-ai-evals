@@ -1,0 +1,5 @@
+import {AppShell, PageHeader} from "@/components/app-shell";
+import {Card} from "@/components/ui";
+
+const dimensions = ["Correct tool selection", "Correct timing", "Argument accuracy", "Result utilization", "Complete trajectory success"];
+export default function ToolsPage() { return <AppShell><PageHeader title="Tool trajectory analytics" description="Selection, timing, arguments, execution, and result use are evaluated independently against canonical tool traces." /><div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">{dimensions.map((item) => <Card className="p-5" key={item}><p className="text-sm font-semibold">{item}</p><p className="mt-3 text-3xl font-bold">—</p><p className="mt-2 text-xs text-slate-500">Requires applicable tool traces</p></Card>)}</div><Card className="mt-6 p-6"><h2 className="font-bold">Complete evidence chain</h2><p className="mt-2 text-sm leading-6 text-slate-600">Tool findings reference trigger turns, versioned definitions, argument provenance, execution status, results, and downstream agent claims. Missing tool evidence produces NOT_APPLICABLE—not an invented score.</p></Card></AppShell>; }

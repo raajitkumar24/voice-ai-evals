@@ -1,0 +1,10 @@
+id: recommendation
+version: "1"
+name: Recommendation generation
+family: RECOMMENDATION
+scope: FINDING
+severity: MEDIUM
+description: Produce the smallest safe, evidence-linked draft proposal for human review.
+applicability: Apply to synthesized findings that have enough evidence.
+prompt_file: prompt.md
+output_schema: recommendation_v1

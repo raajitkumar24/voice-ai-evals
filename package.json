@@ -1,0 +1,13 @@
+{
+  "name": "voice-ai-evals-workspace",
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "scripts": {
+    "dev:web": "pnpm --dir apps/web dev",
+    "lint:web": "pnpm --dir apps/web lint",
+    "typecheck:web": "pnpm --dir apps/web typecheck",
+    "test:web": "pnpm --dir apps/web test",
+    "build:web": "pnpm --dir apps/web build",
+    "test:e2e": "pnpm --dir apps/web test:e2e"
+  }
+}

@@ -1,0 +1,102 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voice-ai-evals"
+version = "0.1.0"
+description = "Open-source evaluation and observability for production Voice AI agents"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "Apache-2.0"}
+authors = [{name = "Voice AI Evals contributors"}]
+dependencies = [
+  "alembic>=1.14,<2",
+  "argon2-cffi>=23.1,<26",
+  "celery[redis]>=5.4,<6",
+  "cryptography>=44,<47",
+  "email-validator>=2.2,<3",
+  "fastapi>=0.115,<1",
+  "httpx>=0.28,<1",
+  "jsonschema>=4.23,<5",
+  "pydantic>=2.10,<3",
+  "pydantic-settings>=2.7,<3",
+  "psycopg[binary]>=3.2,<4",
+  "python-multipart>=0.0.20,<1",
+  "PyYAML>=6,<7",
+  "sqlalchemy>=2.0,<3",
+  "typer>=0.15,<1",
+  "uvicorn[standard]>=0.34,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.14,<2",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<1",
+  "pytest-cov>=6,<7",
+  "respx>=0.22,<1",
+  "ruff>=0.9,<1",
+  "types-jsonschema>=4.23,<5",
+  "types-PyYAML>=6.0,<7",
+]
+
+[project.scripts]
+voice-evals = "voice_evals_sdk.cli:app"
+
+[tool.setuptools.packages.find]
+where = [
+  "apps/api/src",
+  "workers/eval-worker/src",
+  "packages/schemas/src",
+  "packages/eval-core/src",
+  "packages/llm-gateway/src",
+  "packages/llm-providers/src",
+  "packages/connectors/src",
+  "packages/sdk/src",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+  "integration: requires PostgreSQL and Redis",
+  "live_provider: makes a live provider API request",
+  "e2e: end-to-end test",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["apps", "workers", "packages", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "ASYNC", "S"]
+ignore = ["B008", "S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"apps/api/src/voice_evals_api/bootstrap.py" = ["S105"]
+"apps/api/src/voice_evals_api/config.py" = ["S105"]
+"apps/api/src/voice_evals_api/routers/providers.py" = ["S105"]
+"apps/api/src/voice_evals_api/services/provider_runtime.py" = ["S105"]
+"packages/schemas/src/voice_evals_schemas/domain.py" = ["S105"]
+"tests/**" = ["S105", "S106"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+mypy_path = [
+  "apps/api/src",
+  "workers/eval-worker/src",
+  "packages/schemas/src",
+  "packages/eval-core/src",
+  "packages/llm-gateway/src",
+  "packages/llm-providers/src",
+  "packages/connectors/src",
+  "packages/sdk/src",
+]
+
+[[tool.mypy.overrides]]
+module = ["celery", "celery.*"]
+ignore_missing_imports = true

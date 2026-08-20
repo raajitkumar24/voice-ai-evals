@@ -1,0 +1,10 @@
+id: grounding
+version: "1"
+name: Grounding and hallucination
+family: GROUNDING
+scope: CONVERSATION
+severity: HIGH
+description: Classify material factual claims against allowed evidence.
+applicability: Apply to agent turns containing material factual responses.
+prompt_file: prompt.md
+output_schema: judge_output_v1

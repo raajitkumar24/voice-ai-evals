@@ -1,0 +1,42 @@
+{
+  "agent": {
+    "external_id": "demo-loan-agent",
+    "name": "Multilingual Loan Assistant",
+    "description": "Intentionally imperfect read-only demo agent for Voice AI Evals."
+  },
+  "knowledge_sources": [
+    {
+      "external_id": "demo-loan-faq-v1",
+      "version": "1",
+      "source_type": "MARKDOWN",
+      "title": "Verified loan FAQ",
+      "content": "# Loan FAQ\n\nFinal approval is never guaranteed and requires document verification. There is no application fee. Customers may request a human agent at any time.",
+      "metadata": {"demo": true}
+    }
+  ],
+  "tool_definitions": [
+    {
+      "id": "demo-eligibility-v1",
+      "version": "1",
+      "name": "check_eligibility",
+      "description": "Returns preliminary eligibility only; it never grants final approval.",
+      "input_schema": {
+        "type": "object",
+        "properties": {"monthly_income": {"type": "number"}},
+        "required": ["monthly_income"],
+        "additionalProperties": false
+      },
+      "policy": {"must_state_preliminary": true}
+    }
+  ],
+  "configuration": {
+    "id": "demo-loan-config-v1",
+    "agent_id": "demo-loan-agent",
+    "version": "1",
+    "prompt": "Help customers understand preliminary loan eligibility. Use verified knowledge and tool results. Never guarantee final approval or invent fees. Offer a human handoff when requested.",
+    "model": {"provider": "external-agent", "model": "observed-production-model", "parameters": {}},
+    "tool_definition_version_ids": ["demo-eligibility-v1"],
+    "knowledge_source_version_ids": ["demo-loan-faq-v1"],
+    "retrieval_config": {"top_k": 3}
+  }
+}

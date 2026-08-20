@@ -1,0 +1,10 @@
+id: rag_quality
+version: "1"
+name: Knowledge and retrieval quality
+family: RAG
+scope: CONVERSATION
+severity: HIGH
+description: Diagnose knowledge availability, recall, ranking, precision, conflict, and context utilization separately.
+applicability: Apply when knowledge or retrieval evidence is available.
+prompt_file: prompt.md
+output_schema: judge_output_v1

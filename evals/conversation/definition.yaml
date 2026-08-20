@@ -1,0 +1,10 @@
+id: conversation_behavior
+version: "1"
+name: Conversation behavior
+family: CONVERSATION
+scope: CONVERSATION
+severity: MEDIUM
+description: Evaluate transcript-observable voice conversation behavior.
+applicability: Apply when a transcript is available; do not infer audio or prosody.
+prompt_file: prompt.md
+output_schema: judge_output_v1
